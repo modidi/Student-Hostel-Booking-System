@@ -1,5 +1,5 @@
-//load from localStorage
-let hostels = JSON.parse(localStorage.getItem("hostels")) || [];
+//load Data
+let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 
 // Hostel 1
 {
@@ -16,7 +16,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [];
         { src: "images/h1-5.jpg", label: "Study Area" },
     ]
 
-};
+},
 
 // Hostel 2
 {
@@ -34,7 +34,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [];
 
    ]
 
-};
+},
 
 // Hostel 3
 {
@@ -50,7 +50,9 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [];
         { src: "images/h3-4.jpg", label: "Rooftop" },
         { src: "images/h3-5.jpg", label: "Lounge" },
     ]
-};
+
+}
+];
 
 
 // Bookings
