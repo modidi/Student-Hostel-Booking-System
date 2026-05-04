@@ -64,8 +64,123 @@ function displayHostels() {
 
     list.innerHTML = "";
 
-    
+    hostels.forEach((h, i) => {
 
+        let div = document.createElement("div");
+        div.classList.add("card");
+
+        // create card structure
+        div.innerHTML = 
+        <div class="slideshow">
+            <img id="img-${i}">
+            <p id="label-${i}"></p>
+        </div>
+
+        <h3>${h.name}</h3>
+        <p><strong>Location:</strong> ${h.location}</p>
+        <p><strong>Price:</strong> Ksh ${h.price}</p>
+        <p>${h.description}</p>
+
+        <button onClick="book(${i})">Book</button>
+        ;
+
+        list.appendChild(div);
+
+        //Slideshow logic
+
+        let index = 0;
+
+        setInterval(()) => {
+            let img = document.getElementById(`img-${i}`);
+            let label = document.getElementById(`label-${i}`);
+
+            if (img && label) {
+                img.src = h.images[index].src;
+                label.innerText = h.images[index].label;
+
+                index = (index + 1) % h.images.length;
+
+            }
+
+
+        }, 3000);
+
+        });
+
+        }
+    
+    //Search
+ function searchHostels() {
+    let input = document.getElementById("searchInput").ariaValueMax.toLowerCase();
+    let cards = document.getElementsByClassName("card");
+
+    for (let card of cards) {
+        card.style.display = 
+            card.innerText.toLowerCase().includes(input)
+             ? "block"
+             :"none"
+        }
+
+    }
+
+    //Book Hostel
+ function book(i) {
+    bookings.push(hostels[i]);
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+    alert("Booked Successfully!");
+
+    }
+
+    //Display Bookings
+ function displayBookings() {
+
+    let list = document.getElementById("bookingList");
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    bookings.forEach((b, i) =>{
+        let div = document.createElement("div");
+        div.classList.add("card");
+
+        div.innerHTML = 
+        <h3>${b.name}</h3>
+        <p>Ksh ${b.price}</p>
+        <button onClick="cancel(${i})">cancel</button>
+
+        ;
+
+        list.appendChild(div);
+
+    })
+
+ }
+
+ // Cancel Booking
+
+ function cancel (i) {
+    bookings.splice(i, 1);
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+    displayBookings();
+
+ }
+
+ // Contact from
+ function sendMessage(){
+    let name = document.getElementById("contactName").value;
+    let message = document.getElementById("message").value;
+
+    if (! name || !message) {
+        document.getElementById("contactError").innerText = "Fill all fields!";
+        return;
+    }
+
+    alert("Message sent!")
+    
+ }
+
+  displayHostels();
+  displayBookings();
 
 
 }
