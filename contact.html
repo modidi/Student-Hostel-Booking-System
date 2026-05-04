@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    
+    <!-- Header Section -->
+    <header>
+
+        <h1>Contact Us</h1>
+         
+        <!-- Navigation Menu -->
+        <nav>
+
+            <ul>
+
+                <li><a href="index.html">Home</a></li>
+                <li><a href="add.html">Add Hostel</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <!-- Main Section -->
+    <main>
+
+        <section>
+            
+            <!-- User Name Input -->
+            <input id="contactName" placeholder="Your Name">
+            <br><br>
+
+            <!-- Message Input -->
+            <textarea id="message" placeholder="Your Message"></textarea>
+            <br><br>
+
+            <!-- Send Button -->
+            <button onclick="sendMessage()">Send</button>
+
+            <!-- Error Display -->
+            <p id="contactError"></p>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Student Hostel Booking System</p>
+    </footer>
+
+    <script src="code.js" defer></script>
     
 </body>
 </html>
