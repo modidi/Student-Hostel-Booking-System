@@ -23,3 +23,8 @@ nav li{
     display: inline-block;
     margin: 10px;
 }
+
+nav li a{
+    color:white;
+    text-decoration: none;
+}
