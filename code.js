@@ -22,7 +22,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 {
    name: "Olive View Hostel",
    location: "Westlands",
-   price: "7500",
+   price: 7500,
    description: "Budget friendly Hostel with warm and social vibes.",
 
    images: [
@@ -72,7 +72,7 @@ function displayHostels() {
         div.classList.add("card");
 
         // create card structure
-        div.innerHTML = 
+        div.innerHTML = `
         <div class="slideshow">
             <img id="img-${i}">
             <p id="label-${i}"></p>
@@ -84,7 +84,7 @@ function displayHostels() {
         <p>${h.description}</p>
 
         <button onClick="book(${i})">Book</button>
-        ;
+        `;
 
         list.appendChild(div);
 
@@ -92,7 +92,7 @@ function displayHostels() {
 
         let index = 0;
 
-        setInterval(()) => {
+        setInterval(() => {
             let img = document.getElementById(`img-${i}`);
             let label = document.getElementById(`label-${i}`);
 
@@ -113,7 +113,7 @@ function displayHostels() {
     
     //Search
  function searchHostels() {
-    let input = document.getElementById("searchInput").ariaValueMax.toLowerCase();
+    let input = document.getElementById("searchInput").value.toLowerCase();
     let cards = document.getElementsByClassName("card");
 
     for (let card of cards) {
@@ -145,12 +145,12 @@ function displayHostels() {
         let div = document.createElement("div");
         div.classList.add("card");
 
-        div.innerHTML = 
+        div.innerHTML = `
         <h3>${b.name}</h3>
         <p>Ksh ${b.price}</p>
         <button onClick="cancel(${i})">cancel</button>
 
-        ;
+        `;
 
         list.appendChild(div);
 
@@ -185,4 +185,3 @@ function displayHostels() {
   displayBookings();
 
 
-}

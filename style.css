@@ -2,17 +2,22 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-     background-color: #FFFFFF;
+    background-color: #FFFFFF;
+    color:#111827
+     
+
 }
 
 header{
     display: flex;
-    background-color: #808080;
+    background-color: #EEF1F5;
+    border-bottom: 1px solid #D7DCE3;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
 
 }
+
 
 nav ul{
     list-style: none;
@@ -25,20 +30,23 @@ nav ul li{
 }
 
 nav ul li a{
-    color:White; 
+    color: #111827; 
     text-decoration: none;
+    padding: 6px 10px;
 
 }
 
 nav ul li a:hover {
-    color: blueviolet;
+    background-color: #E5E7EB;
+    border-radius: 6px;
 }
+
 
 main {
     padding: 20px;
 }
 
-.cards {
+.card {
     background-color: white;
     padding: 15px;
     margin: 10px;
