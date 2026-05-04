@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #FFFFFF;
+     background-color: #FFFFFF;
 }
 
 header{
@@ -19,12 +19,17 @@ nav ul{
     padding: 0;
 }
 
-nav li{
+nav ul li{
     display: inline-block;
     margin: 10px;
 }
 
-nav li a{
-    color:white;
+nav ul li a{
+    color:White; 
     text-decoration: none;
+
+}
+
+nav ul li a:hover {
+    color: ;
 }
