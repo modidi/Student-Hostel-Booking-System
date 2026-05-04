@@ -31,5 +31,9 @@ nav ul li a{
 }
 
 nav ul li a:hover {
-    color: ;
+    color: blueviolet;
+}
+
+main {
+    padding: 20px;
 }
