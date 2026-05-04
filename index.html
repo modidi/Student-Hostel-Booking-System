@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Hostel Booking System</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <!-- Header -->
+    <header>
+        <h1>Student Hostel Booking System</h1>
     
+        <!-- nav  -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="add.html">Add Hostel</a>
+        <a href="bookings.html">Bookings</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+
+    </nav>
+
+    </header>
+
+    <main>
+        
+        <section>
+            <h2>Available Hostels</h2>
+            <input type="text" id="searchInput" placeholder="Search by location or price..." onkeyup="searchHostels()">
+
+            <div id="hostelList"></div>
+
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2026 Student Hostel Booking Website | All Rights Reserved</p>
+
+    </footer>
+    <script src="code.js" defer></script>
 </body>
 </html>
