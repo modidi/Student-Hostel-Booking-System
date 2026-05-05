@@ -11,7 +11,7 @@
 <body>
     <!-- Header Section -->
     <header>
-        <h1>Hostel Booking System</h1>
+        <h1>Hostel Booking </h1>
     
         <!-- Navigation Menu-->
     <nav>
@@ -33,18 +33,40 @@
     <!-- Main Section -->
 
     <main>
-        
-        <section>
-            <!-- Section Heading -->
-            <h2>Available Hostels</h2>
 
-            <!-- Price Filter -->
+        <section class="hero">
+
+            <h2>Find and Book Hostels Easily</h2>
+            <p>Search, compare and book hostels in different locations instantly</p>
+
+        </section>
+         
+        <!-- Status Section -->
+        <section class="stats">
+
+            <div class="stat-box">
+                 🏠 Hostels: <span id="totalHostel">0</span>
+            </div>
+
+            <div class="stat-box">
+                 📅 Bookings: <span id="totalBookings">0</span>
+            </div>
+           
+        </section>
+        
+        <section class="home-container">
+            <!-- Section Heading -->
+            <h2>🏠 Available Hostels</h2>
+
+            <div class="controls">
+             
+            <!-- Price Input -->
              <label>Max Price: <span id="priceValue">20000</span></label>
              <input type="range" min="1000" max="20000" value="20000" oninput="filterPrice(this.value)">
 
             <!-- Search Input -->
-
             <input type="text" id="searchInput" placeholder="Search hostel..." onkeyup="searchHostels()">
+            </div>
 
             <!-- Hostels will be displayed here -->
 
@@ -55,7 +77,7 @@
 
     <!-- Image Modal -->
     <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModa()">&times</span>
+        <span class="close" onclick="closeModal()">&times</span>
         <img id="modalImg">
         <p id="modalLabel"></p>
     </div>
