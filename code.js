@@ -152,7 +152,8 @@ function displayHostels() {
         <p>${h.description}</p>
 
         <button onClick="book(${i})">Book</button>
-        <button onClick="addFavorite(${i})"> Favorite</button>
+        <button onClick="addFavorite(${i})">❤️ Favorite</button>
+        <button onClick="deleteHostel(${i}")>🗑 Remove</button>
         `;
 
         list.appendChild(div);
@@ -289,6 +290,23 @@ function filterPrice(max) {
 
 }
 
+
+// Delete Hostel
+
+function deleteHostel(index) {
+
+    let confirmDelete = confirm("Are you sure you want to delete this hostel?");
+
+    if (confirmDelete) {
+        hostels.splice(index, 1);
+        localStorage.setItem("hostels", JSON.stringify(hostels));
+
+        toast("Hostel removed successfully")
+
+        displayHostels();
+
+    }
+}
 // toast notification
 
 function toast(msg) {
