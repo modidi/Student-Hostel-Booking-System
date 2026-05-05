@@ -7,6 +7,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
     location: "Nairobi CBD",
     price: 5000,
     description: "Affordable hostel near the city with good security.",
+    rating: 0,
 
     images: [
         { src: "images/h1-1.jpg", label: "Hostel Exterior" },
@@ -24,6 +25,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
    location: "Westlands",
    price: 5800,
    description: "Budget friendly Hostel with warm and social vibes.",
+   rating: 0,
 
    images: [
     { src: "images/h2-1.jpg", label: "Hostel Exterior" },
@@ -42,6 +44,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
     location: "Hurlingham",
     price: 6600,
     description: "Premium hostel with private rooms and study spaces.",
+    rating: 0,
 
     images: [
         { src: "images/h3-1.jpg", label: "Luxury Exterior" },
@@ -59,6 +62,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
     location: "Athi River",
     price: 7000,
     description: "Modern Hostel with stable wifi",
+    rating: 0,
 
     images: [
         { src: "images/h4-1.jpg", label: "Exterior View" },
@@ -76,6 +80,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
     location: "Kamulu",
     price: 7800,
     description: "Ideal for students who love a quiet environment",
+    rating: 0,
 
     images: [
         { src: "images/h5-1.jpg", label: "Building Exterior" },
@@ -93,6 +98,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
     location: "Karen",
     price: 9800,
     description: "Student Accommodation premium, private rooms and gym access.",
+    rating: 0,
 
     images: [
         { src: "images/h6-1.jpg", label: "Front View" },
@@ -108,9 +114,6 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 
 // Bookings
 let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-
-// Favorites
-let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
 // Add Hostel Form Functionality 
 // Handles saving new hostel data
@@ -211,7 +214,9 @@ function displayHostels() {
         <p>${h.description}</p>
 
         <button onClick="book(${i})">Book</button>
-        <button onClick="addFavorite(${i})">❤️ Favorite</button>
+
+        <p> Rating: ${h.rating || 0}/5</p>
+        <button onclick="rateHostel(${i})"> Rate</button>
         `;
 
         list.appendChild(div);
@@ -304,11 +309,30 @@ function displayAdminHostels() {
 
 }
 
-// favorites
-function addFavorite(i){
-    favorites.push(hostels[i]);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-    toast("Added to favorites");
+// Rate 
+function rateHostel(i) {
+    let rating = prompt ("Rate this hostel from 1 to 5");
+
+    rating = Number(rating);
+
+    if (rating >= 1 && rating <= 5) {
+        hostels[i].rating = rating;
+
+        localStorage.setItem("hostels", JSON.stringify(hostels));
+
+        toast("Thanks for rating!")
+        
+        setTimeout(() => {
+             displayHostels();
+
+        }, 500);
+
+       
+        
+    } else {
+        alert('Please enter a number between 1 and 5')
+    }
+
 }
 
     //Display Bookings
@@ -417,16 +441,32 @@ function toast(msg) {
     t.innerText = msg;
 
     t.style.position = "fixed";
-    t.style.bottom = "20px";
-    t.style.right = "20px";
+    t.style.top = "50%";
+    t.style.left = "50%";
+    t.style.transform = "translate(-50%, -50%) scale(0.8)";
     t.style.background = "#111827";
     t.style.color = "white";
-    t.style.padding = "10px";
-    t.style.borderRadius = "6px";
+    t.style.padding = "20px 30px";
+    t.style.borderRadius = "10px";
+    t.style.fontSize = "18px";
+    t.style.fontWeight = "bold";
+    t.style.zIndex = "1000";
+    t.style.opacity = 0;
+    t.style.transition = "all 0.3s ease";
+
 
     document.body.appendChild(t);
 
-    setTimeout(() => t.remove(), 2000);
+    setTimeout(() => {
+        t.style.opacity = "1";
+        t.style.transform = "translate(-50%, -50%) scale(1)";
+    }, 50);
+
+    setTimeout(() =>{
+        t.style.opacity = "0";
+        setTimeout(() => t.remove(), 300);
+    }, 2500);
+         
 }
 
   displayHostels();
