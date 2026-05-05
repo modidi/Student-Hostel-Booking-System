@@ -187,6 +187,65 @@ function closeModal() {
 
 }
 
+//Search Suggestions
+function showSuggestion () {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let box = document.getElementById("suggestions");
+
+    box.innerHTML = "";
+
+    if (input === "") {
+        box.style.display = "none";
+        return;
+    }
+
+    let matches = hostels.filter(h =>
+        h.name.toLowerCase().includes(input)
+    );
+
+    if (matches.length === 0) {
+        box.style.display = "none";
+        return;
+    }
+
+    box.style.display = "block";
+
+    matches.forEach(h => {
+        let div = document.createElement("div");
+        div.classList.add("suggestion-item");
+
+        div.innerText = h.name;
+
+        div.onclick = () => {
+            document.getElementById("searchInput").value = h.name;
+            box.innerHTML = "";
+            box.style.display = "none";
+            
+            highlightHostel(h.name);
+        };
+        box.appendChild(div);
+
+    });
+
+
+}
+
+// Highlight
+function highlightHostel(name) {
+    let cards = document.getElementsByClassName("card");
+
+    for (let card of cards) {
+        if(card.innerText.includes(name)) {
+            card.style.border = "2px solid #2563EB";
+            card.style.transform = "scale(1.02)";
+            card.scrollIntoView({behavior: "smooth", block: "center"});
+
+        }else {
+            card.style.border = "";
+            card.style.transform = "";
+        }
+    }
+}
 
 // Display Hostels
 function displayHostels() {

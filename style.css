@@ -135,9 +135,14 @@ stat-box:hover {
 
 .controls {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 15px;
-    margin-bottom: 20px;
+    align-items: center;
+}
+
+.controls label {
+    display: block;
+    width: 100%;
 }
 
 .controls input[type="text"] {
