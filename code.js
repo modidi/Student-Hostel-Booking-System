@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
             localStorage.setItem("hostels", JSON.stringify(hostels));
 
             toast("Hostel added successfully")
+            document.getElementById("formMsg").innerText = "Hostel added successfully!"
 
             showPreview(newHostel);
 
