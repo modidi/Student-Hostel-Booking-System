@@ -112,8 +112,19 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 ];
 
 
-// Bookings
-let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+// Image Modal
+function openModal(src, label) {
+    document.getElementById("imageModal").style.display = "flex";
+    document.getElementById("modalImg").src = src;
+    document.getElementById("modalLabel").innerText = label;
+
+}
+
+function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+
+}
+
 
 // Add Hostel Form Functionality 
 // Handles saving new hostel data
@@ -174,19 +185,6 @@ function showPreview(hostel) {
 }
 
 
-// Image Modal
-function openModal(src, label) {
-    document.getElementById("imageModal").style.display = "flex";
-    document.getElementById("modalImg").src = src;
-    document.getElementById("modalLabel").innerText = label;
-
-}
-
-function closeModal() {
-    document.getElementById("imageModal").style.display = "none";
-
-}
-
 //Search Dropdown
 function loadHostelDropdown () {
     let select = document.getElementById("hostelSelect");
@@ -205,7 +203,7 @@ function loadHostelDropdown () {
 // Handles selection
 function selectHostel(index) {
    if (index === "") return;
-   let hostel = hostel[index];
+   let hostel = hostels[index];
 
    let cards = document.getElementsByClassName("card");
 
@@ -216,7 +214,7 @@ function selectHostel(index) {
     });
 
     cards[index].style.border = "2px solid #2563EB";
-    cards[index].style.trasform = "scale(1.03)";
+    cards[index].style.transform = "scale(1.03)";
    }
 
    toast(`Viewing ${hostel.name}`);
@@ -311,25 +309,23 @@ function displayAdminHostels() {
 
 }
     
-    //Search
- function searchHostels() {
-    let input = document.getElementById("searchInput").value.toLowerCase();
-    let cards = document.getElementsByClassName("card");
-
-    for (let card of cards) {
-        card.style.display = 
-            card.innerText.toLowerCase().includes(input)
-             ? "block"
-             :"none"
-        }
-
-    }
 
     //Book Hostel
+ let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
  function book(i) {
     
     let checkIn = prompt("Enter Check-in Date (YYYY-MM-DD)");
     let checkOut = prompt("Enter Check-out Date (YYYY-MM-DD)");
+
+    if (!checkIn || !checkOut) {
+        toast("Booking Cancelled");
+        return;
+    }
+
+    if (new Date(checkIn) > new Date(checkOut)) {
+        toast("Check-out must be after check-in");
+        return;
+    }
 
     bookings.push({
         ...hostels[i],

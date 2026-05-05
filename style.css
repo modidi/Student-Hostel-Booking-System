@@ -135,9 +135,9 @@ stat-box:hover {
 
 .controls {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+    align-items: strech;
     position: relative;
 }
 
@@ -156,22 +156,12 @@ stat-box:hover {
     width: 100%;
 }
 
-/* #searchInput {
-    padding: 12px;
-    width: 100%;
-    font-size: 14px;
-    border: 1px solid #D1D5DB;
+#hostelSelect {
+    padding: 10px;
     border-radius: 8px;
-    outline: none;
+    border: 1px solid #D1D5DB;
+    width: 100%;
 }
-
-#searchInput:focus {
-    box-shadow: 0 0 5px rgba(37,99,235,0.3);
-    border-color: #1F2937;
-} */
-
-
-
 #hostelList {
     display: grid;
     gap: 20px;
@@ -317,7 +307,6 @@ form button {
 #formMsg {
     margin-top: 10px;
     font-weight: bold;
-    color: green;
 }
 
 #preview.card {
