@@ -89,7 +89,13 @@ document.addEventListener("DOMContentLoaded", function() {
             showPreview(newHostel);
 
             form.reset ();
+
             displayHostels();
+            displayAdminHostels();
+
+            document.getElementById("adminHostelList").scrollIntoView({
+                behavior: "smooth"
+            });
         });
     }
 });
@@ -153,7 +159,6 @@ function displayHostels() {
 
         <button onClick="book(${i})">Book</button>
         <button onClick="addFavorite(${i})">❤️ Favorite</button>
-        <button onClick="deleteHostel(${i}")>🗑 Remove</button>
         `;
 
         list.appendChild(div);
@@ -184,6 +189,32 @@ function displayHostels() {
         });
 
         }
+
+//Admin: Display Hostels
+function displayAdminHostels() {
+
+    let list = document.getElementById("adminHostelList");
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    hostels.forEach((h, i) => {
+
+        let div = document.createElement("div");
+        div.classList.add("card")
+
+        div.innerHTML = `
+           <h3>${h.name}</h3>
+           <p><strong>Location:</strong>${h.location}</p>
+           <p><strong>Price:</strong>${h.price}</p>
+           <p>${h.description}</p>
+           <button onClick="deleteHostel(${i})">🗑 Delete</button>
+ 
+        `;
+        list.appendChild(div);
+    });
+
+}
     
     //Search
  function searchHostels() {
@@ -292,23 +323,22 @@ function filterPrice(max) {
 
 
 // Delete Hostel
-
 function deleteHostel(index) {
 
-    let confirmDelete = confirm("Are you sure you want to delete this hostel?");
+    if (confirm("Are you sure you want to delete this hostel?")) {
 
-    if (confirmDelete) {
         hostels.splice(index, 1);
         localStorage.setItem("hostels", JSON.stringify(hostels));
 
-        toast("Hostel removed successfully")
+        toast("🗑 Hostel removed successfully");
 
         displayHostels();
+        displayAdminHostels();
 
     }
 }
-// toast notification
 
+// toast notification
 function toast(msg) {
     let t = document.createElement("div");
     t.innerText = msg;
@@ -328,5 +358,6 @@ function toast(msg) {
 
   displayHostels();
   displayBookings();
+  displayAdminHostels()
 
 
