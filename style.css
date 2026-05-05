@@ -69,13 +69,6 @@ main {
     flex: 1;
 }
 
-#searchInput {
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 20px;
-    border: 1px solid #D1D5DB;
-    border-radius: 8px;
-}
 
 #hostelList {
     display: grid;
@@ -135,10 +128,15 @@ stat-box:hover {
     margin: auto;
 }
 
+.home-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .controls {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     margin-bottom: 20px;
 }
 
@@ -152,9 +150,53 @@ stat-box:hover {
     width: 100%;
 }
 
-.home-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+#searchInput {
+    padding: 12px;
+    width: 100%;
+    font-size: 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    outline: none;
+}
+
+#searchInput:focus {
+    box-shadow: 0 0 5px rgba(37,99,235,0.3);
+    border-color: #1F2937;
+}
+
+#suggestions {
+    width: 100%;
+    position: absolute;
+    max-width: 400px;
+    margin-top: 5px;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    z-index: 1000;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.suggestion-item {
+    padding: 12px;
+    font-size: 13px;
+    border-bottom: 1px solid #F3F4F6;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.suggestions-item:hover {
+    background-color: #F3F4F6;
+}
+ .search-wrapper {
+    position: relative;
+    max-width: 400px;
+ }
+
+#hostelList {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .card {
