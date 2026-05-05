@@ -61,6 +61,57 @@ let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 // Favorites
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
+// Add Hostel Form Functionality 
+// Handles saving new hostel data
+document.addEventListener("DOMContentLoaded", function() {
+
+    let form = document.getElementById("hostelForm");
+
+    if (form) {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let newHostel = {
+                name: document.getElementById("name").value,
+                location: document.getElementById("location").value,
+                price: document.getElementById("price").value,
+                description: document.getElementById("description").value,
+                images: [
+                    { src: "images/default.jpg", label: "New Hostel"}
+                ]
+            };
+            
+            hostels.push(newHostel);
+            localStorage.setItem("hostels", JSON.stringify(hostels));
+
+            toast("Hostel added successfully")
+
+            showPreview(newHostel);
+
+            form.reset ();
+            displayHostels();
+        });
+    }
+});
+
+// preview function
+function showPreview(hostel) {
+    let preview = document.getElementById("preview");
+
+    if(!preview) return;
+
+    preview.innerHTML = `
+      <div class="card">
+      <h3>${hostel.name}</h3>
+      <p>${hostel.location}</p>
+      <p>${hostel.price}</p>
+      <p>${hostel.description}</p>
+      </div>
+    
+    `;
+}
+
+
 // Image Modal
 function openModal(src, label) {
     document.getElementById("imageModal").style.display = "flex";
@@ -166,7 +217,7 @@ function displayHostels() {
 }
 
 // favorites
-function addFavorites(i){
+function addFavorite(i){
     favorites.push(hostels[i]);
     localStorage.setItem("favorites", JSON.stringify(favorites));
     toast("Added to favorites");

@@ -115,6 +115,11 @@ button {
     cursor: pointer;
     width: 100%;
     margin-top: 10px;
+    transition: 0.2s ease-in-out
+}
+
+button:active {
+    transform: scale(0.98);
 }
 
 button:hover {
@@ -140,7 +145,7 @@ button:hover {
     top: 20px;
     position: absolute;
     right: 30px;
-    color: white;
+    color: rgb(61, 22, 22);
     font-size: 30px;
     cursor: pointer;
 }
@@ -161,7 +166,7 @@ section:hover {
 
 
 input, textarea {
-    width: 100px;
+    width: 100%;
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #D1D5DB;
@@ -218,9 +223,46 @@ footer {
     font-size: 15px;
 }
 
+.form-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255,255, 0.95);
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #D1D5DB;
+}
+
+form button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#formMsg {
+    margin-top: 10px;
+    font-weight: bold;
+    color: green;
+}
+
+#preview.card {
+    max-width: 400px;
+    margin: 20px auto;
+
+}
+
 @media (max-width: 768px) {
     nav ul li {
         display:block;
+        margin: 10px 0;
 
     }
 }
