@@ -95,11 +95,11 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
     description: "Student Accommodation premium, private rooms and gym access.",
 
     images: [
-        { src: "images/h5-1.jpg", label: "Building Exterior" },
-        { src: "images/h5-2.jpg", label: "Dormitory Beds" },
-        { src: "images/h5-3.jpg", label: "Reading Area" },
-        { src: "images/h5-4.jpg", label: "Dining Space" },
-        { src: "images/h5-5.webp", label: "Laundry area" },
+        { src: "images/h6-1.jpg", label: "Front View" },
+        { src: "images/h6-2.jpg", label: "Private Room" },
+        { src: "images/h6-3.jpg", label: "Gym Area" },
+        { src: "images/h6-4.jpg", label: "Study Hall" },
+        { src: "images/h6-5.jpg", label: "Student Lounge" },
 
     ]
 }
