@@ -56,7 +56,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 // Hostel 4
 {
     name: "Mo's Hostel",
-    location:"Athi River",
+    location: "Athi River",
     price: 7000,
     description: "Modern Hostel with stable wifi",
 
@@ -68,25 +68,41 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
         { src: "images/h4-5.jpg", label: "Hallway" },
 
     ]
-}
+},
 
 // Hostel 5
-// {
-//     name: "123 Student Hostel",
-//     location:"Athi River",
-//     price: 7800,
-//     description: "Modern Hostel with stable wifi",
+{
+    name: "The Fort Hostel",
+    location: "Kamulu",
+    price: 7800,
+    description: "Ideal for students who love a quiet environment",
 
-//     images: [
-//         { src: "images/h4-1.jpg", label: "Exterior View" },
-//         { src: "images/h4-2.jpg", label: "Shared room" },
-//         { src: "images/h4-3.webp", label: "Lounge Area" },
-//         { src: "images/h4-4.jpg", label: "Kitchen Area" },
-//         { src: "images/h4-5.jpg", label: "Hallway" },
+    images: [
+        { src: "images/h5-1.jpg", label: "Building Exterior" },
+        { src: "images/h5-2.jpg", label: "Dormitory Beds" },
+        { src: "images/h5-3.jpg", label: "Reading Area" },
+        { src: "images/h5-4.jpg", label: "Dining Space" },
+        { src: "images/h5-5.webp", label: "Laundry area" },
 
-//     ]
-// }
+    ]
+},
 
+// Hostel 6
+{
+    name: "Make it Rain Hostel",
+    location: "Karen",
+    price: 9800,
+    description: "Student Accommodation premium, private rooms and gym access.",
+
+    images: [
+        { src: "images/h5-1.jpg", label: "Building Exterior" },
+        { src: "images/h5-2.jpg", label: "Dormitory Beds" },
+        { src: "images/h5-3.jpg", label: "Reading Area" },
+        { src: "images/h5-4.jpg", label: "Dining Space" },
+        { src: "images/h5-5.webp", label: "Laundry area" },
+
+    ]
+}
 ];
 
 
