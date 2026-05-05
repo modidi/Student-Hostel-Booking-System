@@ -356,9 +356,7 @@ function rateHostel(i) {
              displayHostels();
 
         }, 500);
-
-       
-        
+ 
     } else {
         alert('Please enter a number between 1 and 5')
     }
