@@ -258,14 +258,40 @@ input, textarea {
     margin-bottom: 10px;
 }
 
-footer {
-    background-color: #EEF1F5;
+.form-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255,255, 0.95);
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     text-align: center;
-    padding: 15px;
-    border-top: 1px solid #D7DCE3;
-    color: #374151;
-    position: relative;
-    z-index: 1;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #D1D5DB;
+}
+
+form button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#formMsg {
+    margin-top: 10px;
+    font-weight: bold;
+    color: green;
+}
+
+#preview.card {
+    max-width: 400px;
+    margin: 20px auto;
+
 }
 
 .about-hero {
@@ -308,40 +334,81 @@ footer {
     font-size: 15px;
 }
 
-.form-container {
-    max-width: 500px;
+.contact-hero {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.contact-hero h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.contact-hero p {
+    color:#4B5563;
+    font-size: 15px;
+}
+
+.contact-container {
+    padding: 25px;
     margin: 20px auto;
+    max-width: 500px;
+    text-align: center;
+    border-radius: 12px;
+    background: rgba(255, 255,255, 0.95);
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+}
+
+.contact-container input, .contact-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #D1D5DB;
+    font-size: 14px;
+}
+
+.contact-container textarea {
+    min-height: 120px;
+    resize: none;
+}
+
+.contact-container button {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.contact-info {
+    text-align: center;
+    max-width: 500px;
     padding: 20px;
+    margin: 20px auto;
     background: rgba(255, 255,255, 0.95);
     border-radius: 12px;
     border: 1px solid #E5E7EB;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-form input {
-    width: 100%;
-    padding: 10px;
+.contact-info p {
     margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #D1D5DB;
+    font-size: 14px;
 }
 
-form button {
-    width: 100%;
-    margin-top: 10px;
-}
-
-#formMsg {
-    margin-top: 10px;
+#contactError{
+    color: red;
     font-weight: bold;
-    color: green;
+    margin-top: 10px;
 }
 
-#preview.card {
-    max-width: 400px;
-    margin: 20px auto;
-
+footer {
+    background-color: #EEF1F5;
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid #D7DCE3;
+    color: #374151;
+    position: relative;
+    z-index: 1;
 }
 
 @media (max-width: 768px) {
