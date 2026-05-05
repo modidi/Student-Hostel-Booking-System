@@ -58,6 +58,23 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 // Bookings
 let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
+// Favorites
+let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+// Image Modal
+function openModal(src, label) {
+    document.getElementById("imageModal").style.display = "flex";
+    document.getElementById("modalImg").src = src;
+    document.getElementById("modalLabel").innerText = label;
+
+}
+
+function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+
+}
+
+
 // Display Hostels
 function displayHostels() {
 
@@ -84,6 +101,7 @@ function displayHostels() {
         <p>${h.description}</p>
 
         <button onClick="book(${i})">Book</button>
+        <button onClick="addFavorite(${i})"> Favorite</button>
         `;
 
         list.appendChild(div);
@@ -99,6 +117,10 @@ function displayHostels() {
             if (img && label) {
                 img.src = h.images[index].src;
                 label.innerText = h.images[index].label;
+
+                img.onclick = () => {
+                    openModal(h.images[index].src, h.images[index].label);
+                };
 
                 index = (index + 1) % h.images.length;
 
@@ -127,11 +149,28 @@ function displayHostels() {
 
     //Book Hostel
  function book(i) {
-    bookings.push(hostels[i]);
-    localStorage.setItem("bookings", JSON.stringify(bookings));
-    alert("Booked Successfully!");
+    
+    let checkIn = prompt("Enter Check-in Date (YYYY-MM-DD)");
+    let checkOut = prompt("Enter Check-out Date (YYYY-MM-DD)");
 
-    }
+    bookings.push({
+        ...hostels[i],
+        checkIn,
+        checkOut
+    })
+
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+
+    toast("Booking Confirmed!");
+
+}
+
+// favorites
+function addFavorites(i){
+    favorites.push(hostels[i]);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    toast("Added to favorites");
+}
 
     //Display Bookings
  function displayBookings() {
@@ -148,6 +187,8 @@ function displayHostels() {
         div.innerHTML = `
         <h3>${b.name}</h3>
         <p>Ksh ${b.price}</p>
+        <p><strong>Check-in:</strong> ${b.checkIn}</p>
+        <p><strong>Check-out:</strong> ${b.checkOut}</p>
         <button onClick="cancel(${i})">cancel</button>
 
         `;
@@ -164,6 +205,7 @@ function displayHostels() {
     bookings.splice(i, 1);
     localStorage.setItem("bookings", JSON.stringify(bookings));
     displayBookings();
+    toast("Booking Cancelled");
 
  }
 
@@ -177,9 +219,43 @@ function displayHostels() {
         return;
     }
 
-    alert("Message sent!")
+    toast("Message sent!")
     
  }
+
+//  Price Filter
+function filterPrice(max) {
+    document.getElementById("priceValue").innerText = max;
+    
+    let cards = document.getElementsByClassName("card");
+
+    hostels.forEach((h, i) => {
+        if (cards[i]) {
+            cards[i].style.display = (h.price <= max) ? "block" : "none";
+
+        }
+    });
+
+}
+
+// toast notification
+
+function toast(msg) {
+    let t = document.createElement("div");
+    t.innerText = msg;
+
+    t.style.position = "fixed";
+    t.style.bottom = "20px";
+    t.style.right = "20px";
+    t.style.background = "#111827";
+    t.style.color = "white";
+    t.style.padding = "10px";
+    t.style.borderRadius = "6px";
+
+    document.body.appendChild(t);
+
+    setTimeout(() => t.remove(), 2000);
+}
 
   displayHostels();
   displayBookings();
