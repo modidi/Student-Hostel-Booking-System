@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             displayHostels();
             displayAdminHostels();
+            updateStats();
 
             document.getElementById("adminHostelList").scrollIntoView({
                 behavior: "smooth"
@@ -282,8 +283,16 @@ function addFavorite(i){
 
  }
 
- // Cancel Booking
+//  Update Stats
+function updateStats() {
+    let hostelCount = document.getElementById("totalHostels");
+    let bookingCount = document.getElementById("totalBookings");
 
+    if (hostelCount) hostelCount.innerText = hostels.length;
+    if (bookingCount) bookingCount.innerText = bookings.length;
+}
+
+ // Cancel Booking
  function cancel (i) {
     bookings.splice(i, 1);
     localStorage.setItem("bookings", JSON.stringify(bookings));
@@ -334,6 +343,7 @@ function deleteHostel(index) {
 
         displayHostels();
         displayAdminHostels();
+        updateStats();
 
     }
 }
@@ -359,5 +369,6 @@ function toast(msg) {
   displayHostels();
   displayBookings();
   displayAdminHostels()
+  updateStats();
 
 
