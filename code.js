@@ -5,7 +5,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 {
     name: "Blooming Hostel",
     location: "Nairobi CBD",
-    price: 5500,
+    price: 5000,
     description: "Affordable hostel near the city with good security.",
 
     images: [
@@ -22,7 +22,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 {
    name: "Olive View Hostel",
    location: "Westlands",
-   price: 7500,
+   price: 5800,
    description: "Budget friendly Hostel with warm and social vibes.",
 
    images: [
@@ -40,7 +40,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 {
     name: "Elite Stay Hostel",
     location: "Hurlingham",
-    price: 10000,
+    price: 6600,
     description: "Premium hostel with private rooms and study spaces.",
 
     images: [
@@ -51,7 +51,42 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
         { src: "images/h3-5.jpg", label: "Lounge" },
     ]
 
+},
+
+// Hostel 4
+{
+    name: "123 Student Hostel",
+    location:"Athi River",
+    price: 7000,
+    description: "Modern Hostel with stable wifi",
+
+    images: [
+        { src: "images/h4-1.jpg", label: "Exterior View" },
+        { src: "images/h4-2.jpg", label: "Shared room" },
+        { src: "images/h4-3.webp", label: "Lounge Area" },
+        { src: "images/h4-4.jpg", label: "Kitchen Area" },
+        { src: "images/h4-5.jpg", label: "Hallway" },
+
+    ]
 }
+
+// Hostel 5
+// {
+//     name: "123 Student Hostel",
+//     location:"Athi River",
+//     price: 7800,
+//     description: "Modern Hostel with stable wifi",
+
+//     images: [
+//         { src: "images/h4-1.jpg", label: "Exterior View" },
+//         { src: "images/h4-2.jpg", label: "Shared room" },
+//         { src: "images/h4-3.webp", label: "Lounge Area" },
+//         { src: "images/h4-4.jpg", label: "Kitchen Area" },
+//         { src: "images/h4-5.jpg", label: "Hallway" },
+
+//     ]
+// }
+
 ];
 
 
