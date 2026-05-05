@@ -55,7 +55,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 
 // Hostel 4
 {
-    name: "123 Student Hostel",
+    name: "Mo's Hostel",
     location:"Athi River",
     price: 7000,
     description: "Modern Hostel with stable wifi",
