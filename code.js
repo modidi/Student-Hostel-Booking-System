@@ -166,31 +166,34 @@ function displayHostels() {
         list.appendChild(div);
 
         //Slideshow logic
+        let currentIndex = 0;
 
-        let index = 0;
-
-        setInterval(() => {
+        function updateSlide() {
             let img = document.getElementById(`img-${i}`);
             let label = document.getElementById(`label-${i}`);
 
-            if (img && label) {
-                img.src = h.images[index].src;
-                label.innerText = h.images[index].label;
+            if (img && label && h.images.length > 0) {
+
+                let currentImg = h.images[currentIndex];
+
+                img.src = currentImg.src;
+                label.innerText = currentImg.label;
 
                 img.onclick = () => {
-                    openModal(h.images[index].src, h.images[index].label);
+                    openModal(currentImg.src, currentImg.label);
                 };
 
-                index = (index + 1) % h.images.length;
+                currentIndex = (currentIndex + 1) % h.images.length;
 
             }
 
 
-        }, 3000);
-
-        });
-
         }
+        updateSlide();
+        setInterval(updateSlide, 5000);
+        
+    });
+}
 
 //Admin: Display Hostels
 function displayAdminHostels() {
@@ -304,15 +307,23 @@ function updateStats() {
 
  // Contact from
  function sendMessage(){
-    let name = document.getElementById("contactName").value;
-    let message = document.getElementById("message").value;
+    let name = document.getElementById("contactName").value.trim();
+    let message = document.getElementById("message").value.trim();
+    let error = document.getElementById("contactError");
 
     if (! name || !message) {
-        document.getElementById("contactError").innerText = "Fill all fields!";
+        error.innerText = " Please fill all fields!";
+        error.style.color = "red"
         return;
     }
 
-    toast("Message sent!")
+    error.innerText = "";
+
+    toast("Message sent successfully !")
+
+    document.getElementById("contactName").value = "";
+    document.getElementById("message").value = "";
+
     
  }
 
