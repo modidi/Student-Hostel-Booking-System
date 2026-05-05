@@ -188,7 +188,7 @@ function closeModal() {
 }
 
 //Search Suggestions
-function showSuggestion () {
+function showSuggestions () {
     let input = document.getElementById("searchInput").value.toLowerCase();
     let box = document.getElementById("suggestions");
 
