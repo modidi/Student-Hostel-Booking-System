@@ -187,64 +187,39 @@ function closeModal() {
 
 }
 
-//Search Suggestions
-function showSuggestions () {
-    let input = document.getElementById("searchInput").value.toLowerCase();
-    let box = document.getElementById("suggestions");
+//Search Dropdown
+function loadHostelDropdown () {
+    let select = document.getElementById("hostelSelect");
+    if(!select) return;
 
-    box.innerHTML = "";
-
-    if (input === "") {
-        box.style.display = "none";
-        return;
-    }
-
-    let matches = hostels.filter(h =>
-        h.name.toLowerCase().includes(input)
-    );
-
-    if (matches.length === 0) {
-        box.style.display = "none";
-        return;
-    }
-
-    box.style.display = "block";
-
-    matches.forEach(h => {
-        let div = document.createElement("div");
-        div.classList.add("suggestion-item");
-
-        div.innerText = h.name;
-
-        div.onclick = () => {
-            document.getElementById("searchInput").value = h.name;
-            box.innerHTML = "";
-            box.style.display = "none";
-            
-            highlightHostel(h.name);
-        };
-        box.appendChild(div);
-
+    select.innerHTML = `<option value="">---Select Hostel---</option>`;
+    hostels.forEach((h, i) => {
+        let option = document.createElement("option");
+        option.value = i;
+        option.textContent = h.name;
+        select.appendChild(option);
     });
-
 
 }
 
-// Highlight
-function highlightHostel(name) {
-    let cards = document.getElementsByClassName("card");
+// Handles selection
+function selectHostel(index) {
+   if (index === "") return;
+   let hostel = hostel[index];
 
-    for (let card of cards) {
-        if(card.innerText.includes(name)) {
-            card.style.border = "2px solid #2563EB";
-            card.style.transform = "scale(1.02)";
-            card.scrollIntoView({behavior: "smooth", block: "center"});
+   let cards = document.getElementsByClassName("card");
 
-        }else {
-            card.style.border = "";
-            card.style.transform = "";
-        }
-    }
+   if (cards[index]) {
+    cards[index].scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    cards[index].style.border = "2px solid #2563EB";
+    cards[index].style.trasform = "scale(1.03)";
+   }
+
+   toast(`Viewing ${hostel.name}`);
 }
 
 // Display Hostels
@@ -532,5 +507,6 @@ function toast(msg) {
   displayBookings();
   displayAdminHostels()
   updateStats();
+  loadHostelDropdown();
 
 
