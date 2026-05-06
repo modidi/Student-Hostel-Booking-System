@@ -33,6 +33,8 @@
 
     <!-- Main Section -->
     <main>
+
+        <!-- Form Section -->
         <section class="form-container">
 
             <h2> 🏠 Create New Hostel Listing</h2>
@@ -47,24 +49,26 @@
                 <input id="location" placeholder="Location" required>
 
                 <!-- Input for price -->
-                <input id="price" placeholder="Price (Ksh)" required>
+                <input id="price" type="number" placeholder="Price (Ksh)" required>
 
-                <!-- Input for decription -->
+                <!-- Input for description -->
                 <input id="description" placeholder="Description">
 
                 <!-- Submit button -->
                 <button type="submit"> ➕ Add Hostel</button>
 
+                <!-- Msg shown after submission -->
                 <p id="formMsg"></p>
-
-
 
             </form>
         </section>
 
+        <!-- Admin Section -->
         <section class="manage-container">
 
             <h2> Manage Hostels</h2>
+
+            <!-- Hostels will be inserted inserted here  -->
             <div id="adminHostelList"></div>
 
         </section>
