@@ -377,7 +377,11 @@ function displayAdminHostels() {
         return;
     }
 
+    let index = localStorage.getItem("selectedHostel");
+    let hostel = hostels[index];
+
     bookings.push({
+        hostelName: hostel ? hostel.name: "Unknown Hostel",
         userName: name,
         email,
         phone,
@@ -386,6 +390,8 @@ function displayAdminHostels() {
      });
 
      localStorage.setItem("bookings", JSON.stringify(bookings));
+
+     displayBookings();
 
     toast(`Booked successfully!`);
 
@@ -437,7 +443,7 @@ function rateHostel(i) {
         div.classList.add("card");
 
         div.innerHTML = `
-        <h3>Bookings ${i + 1}</h3>
+        <h3>${b.hostelName}</h3>
 
         <p><strong>Name:</strong> ${b.userName}</p>
         <p><strong>Email:</strong> ${b.email}</p>
