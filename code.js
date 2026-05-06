@@ -111,18 +111,37 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 }
 ];
 
+let currentImages = [];
+let currentIndex = 0;
 
 // Image Modal
-function openModal(src, label) {
-    document.getElementById("imageModal").style.display = "flex";
-    document.getElementById("modalImg").src = src;
-    document.getElementById("modalLabel").innerText = label;
+function openModal(src, label,hostelIndex) {
+    currentImages = hostels[hostelIndex].images;
+    currentIndex = currentImages.findIndex(img => img.src === src);
+
+    showModalImage();
+
+    document.getElementById("imageModal").style.display = "flex"; 
 
 }
 
-function closeModal() {
-    document.getElementById("imageModal").style.display = "none";
+function showModalImage() {
+    let img = document.getElementById("modalImg");
+    let label = document.getElementById("modalLabel");
 
+    img.src = currentImages[currentIndex].src;
+    label.innerText = currentImages[currentIndex].label;
+
+}
+
+function nextImage() {
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    showModalImage();
+}
+
+function prevImage() {
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    showModalImage();
 }
 
 
@@ -268,7 +287,7 @@ function displayHostels() {
                 label.innerText = currentImg.label;
 
                 img.onclick = () => {
-                    openModal(currentImg.src, currentImg.label);
+                    openModal(currentImg.src, currentImg.label, i);
                 };
 
                 currentIndex = (currentIndex + 1) % h.images.length;
