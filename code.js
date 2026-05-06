@@ -1,4 +1,4 @@
-//load Data
+//Data
 let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 
 // Hostel 1
@@ -118,6 +118,7 @@ let currentIndex = 0;
 function openModal(src, label,hostelIndex) {
     currentImages = hostels[hostelIndex].images;
     currentIndex = currentImages.findIndex(img => img.src === src);
+    if (currentIndex === -1) currentIndex = 0;
 
     showModalImage();
 
@@ -128,6 +129,8 @@ function openModal(src, label,hostelIndex) {
 function showModalImage() {
     let img = document.getElementById("modalImg");
     let label = document.getElementById("modalLabel");
+
+    if (!currentImages.length) return;
 
     img.src = currentImages[currentIndex].src;
     label.innerText = currentImages[currentIndex].label;
@@ -148,64 +151,114 @@ function closeModal() {
     document.getElementById("imageModal").style.display = "none";
 }
 
-// Add Hostel Form Functionality 
-// Handles saving new hostel data
-document.addEventListener("DOMContentLoaded", function() {
+// Display Hostels
+function displayHostels() {
 
-    let form = document.getElementById("hostelForm");
+    let list = document.getElementById("hostelList");
+    if (!list) return;
 
-    if (form) {
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
+    list.innerHTML = "";
 
-            let newHostel = {
-                name: document.getElementById("name").value,
-                location: document.getElementById("location").value,
-                price: document.getElementById("price").value,
-                description: document.getElementById("description").value,
-                images: [
-                    { src: "images/default.jpg", label: "New Hostel"}
-                ]
-            };
-            
-            hostels.push(newHostel);
-            localStorage.setItem("hostels", JSON.stringify(hostels));
+    hostels.forEach((h, i) => {
 
-            toast("Hostel added successfully")
-            document.getElementById("formMsg").innerText = "Hostel added successfully!"
+        let div = document.createElement("div");
+        div.classList.add("card");
 
-            showPreview(newHostel);
+        // create card structure
+        div.innerHTML = `
+        <div class="slideshow">
+            <img id="img-${i}">
+            <p id="label-${i}"></p>
+        </div>
 
-            form.reset ();
+        <h3>${h.name}</h3>
+        <p><strong>Location:</strong> ${h.location}</p>
+        <p><strong>Price:</strong> Ksh ${h.price}</p>
+        <p>${h.description}</p>
 
-            displayHostels();
-            displayAdminHostels();
-            updateStats();
+        <button onclick="gotoBooking(${i})">Book</button>
 
-            document.getElementById("adminHostelList").scrollIntoView({
-                behavior: "smooth"
-            });
-        });
-    }
-});
+        <p> Rating: ${h.rating || 0}/5</p>
+        <button onclick="rateHostel(${i})"> Rate</button>
+        `;
 
-// preview function
-function showPreview(hostel) {
-    let preview = document.getElementById("preview");
+        list.appendChild(div);
 
-    if(!preview) return;
+        //Slideshow logic
+        let currentIndex = 0;
 
-    preview.innerHTML = `
-      <div class="card">
-      <h3>${hostel.name}</h3>
-      <p>${hostel.location}</p>
-      <p>${hostel.price}</p>
-      <p>${hostel.description}</p>
-      </div>
-    
-    `;
+        function updateSlide() {
+            let img = document.getElementById(`img-${i}`);
+            let label = document.getElementById(`label-${i}`);
+
+            if (img && label && h.images.length > 0) {
+
+                let currentImg = h.images[currentIndex];
+
+                img.src = currentImg.src;
+                label.innerText = currentImg.label;
+
+                img.onclick = () => {
+                    openModal(currentImg.src, currentImg.label, i);
+                };
+
+                currentIndex = (currentIndex + 1) % h.images.length;
+
+            }
+
+
+        }
+        updateSlide();
+        setInterval(updateSlide, 5000);
+        
+    });
 }
 
+// Booking Direct
+window.gotoBooking = function (index) {
+  localStorage.setItem("selectedHostel", index);
+  window.location.href = "bookings.html";
+};
+
+
+// Rate 
+function rateHostel(i) {
+    let rating = prompt ("Rate this hostel from 1 to 5");
+
+    rating = Number(rating);
+
+    if (rating >= 1 && rating <= 5) {
+        hostels[i].rating = rating;
+
+        localStorage.setItem("hostels", JSON.stringify(hostels));
+
+        toast("Thanks for rating!")
+        
+        setTimeout(() => {
+             displayHostels();
+
+        }, 500);
+ 
+    } else {
+        alert('Please enter a number between 1 and 5')
+    }
+
+}
+
+//  Price Filter
+function filterPrice(max) {
+    document.getElementById("priceValue").innerText = max;
+    
+    let cards = document.getElementsByClassName("card");
+
+    hostels.forEach((h, i) => {
+        if (cards[i]) {
+            cards[i].style.display = (h.price <= max) ? "block" : "none";
+
+        }
+    });
+
+}
 
 //Search Dropdown
 function loadHostelDropdown () {
@@ -242,104 +295,7 @@ function selectHostel(index) {
    toast(`Viewing ${hostel.name}`);
 }
 
-// Display Hostels
-function displayHostels() {
-
-    let list = document.getElementById("hostelList");
-    if (!list) return;
-
-    list.innerHTML = "";
-
-    hostels.forEach((h, i) => {
-
-        let div = document.createElement("div");
-        div.classList.add("card");
-
-        // create card structure
-        div.innerHTML = `
-        <div class="slideshow">
-            <img id="img-${i}">
-            <p id="label-${i}"></p>
-        </div>
-
-        <h3>${h.name}</h3>
-        <p><strong>Location:</strong> ${h.location}</p>
-        <p><strong>Price:</strong> Ksh ${h.price}</p>
-        <p>${h.description}</p>
-
-        <button onclick="gotoBooking(${i})">Book</button>
-
-        <p> Rating: ${h.rating || 0}/5</p>
-        <button onclick="rateHostel(${i})"> Rate</button>
-        `;
-
-        list.appendChild(div);
-
-
-
-        //Slideshow logic
-        let currentIndex = 0;
-
-        function updateSlide() {
-            let img = document.getElementById(`img-${i}`);
-            let label = document.getElementById(`label-${i}`);
-
-            if (img && label && h.images.length > 0) {
-
-                let currentImg = h.images[currentIndex];
-
-                img.src = currentImg.src;
-                label.innerText = currentImg.label;
-
-                img.onclick = () => {
-                    openModal(currentImg.src, currentImg.label, i);
-                };
-
-                currentIndex = (currentIndex + 1) % h.images.length;
-
-            }
-
-
-        }
-        updateSlide();
-        setInterval(updateSlide, 5000);
-        
-    });
-}
-
-window.gotoBooking = function(index) {
-    localStorage.setItem("selectedHostel", index);
-    window.location.href = "bookings.html";
-};
-
-//Admin: Display Hostels
-function displayAdminHostels() {
-
-    let list = document.getElementById("adminHostelList");
-    if (!list) return;
-
-    list.innerHTML = "";
-
-    hostels.forEach((h, i) => {
-
-        let div = document.createElement("div");
-        div.classList.add("card")
-
-        div.innerHTML = `
-           <h3>${h.name}</h3>
-           <p><strong>Location:</strong>${h.location}</p>
-           <p><strong>Price:</strong>${h.price}</p>
-           <p>${h.description}</p>
-           <button onClick="deleteHostel(${i})">🗑 Delete</button>
- 
-        `;
-        list.appendChild(div);
-    });
-
-}
-    
-
-    //Book Hostel
+  //Book Hostel
  let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
  
  document.addEventListener("DOMContentLoaded", function (){
@@ -401,31 +357,7 @@ function displayAdminHostels() {
 
  });
 
-// Rate 
-function rateHostel(i) {
-    let rating = prompt ("Rate this hostel from 1 to 5");
-
-    rating = Number(rating);
-
-    if (rating >= 1 && rating <= 5) {
-        hostels[i].rating = rating;
-
-        localStorage.setItem("hostels", JSON.stringify(hostels));
-
-        toast("Thanks for rating!")
-        
-        setTimeout(() => {
-             displayHostels();
-
-        }, 500);
- 
-    } else {
-        alert('Please enter a number between 1 and 5')
-    }
-
-}
-
-    //Display Bookings
+  //Display Bookings
  function displayBookings() {
 
     let list = document.getElementById("bookingList");
@@ -464,23 +396,108 @@ function rateHostel(i) {
 
  }
 
-//  Update Stats
-function updateStats() {
-    let hostelCount = document.getElementById("totalHostels");
-    let bookingCount = document.getElementById("totalBookings");
+//Admin: Display Hostels
+function displayAdminHostels() {
 
-    if (hostelCount) hostelCount.innerText = hostels.length;
-    if (bookingCount) bookingCount.innerText = bookings.length;
+    let list = document.getElementById("adminHostelList");
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    hostels.forEach((h, i) => {
+
+        let div = document.createElement("div");
+        div.classList.add("card")
+
+        div.innerHTML = `
+           <h3>${h.name}</h3>
+           <p><strong>Location:</strong>${h.location}</p>
+           <p><strong>Price:</strong>${h.price}</p>
+           <p>${h.description}</p>
+           <button onClick="deleteHostel(${i})">🗑 Delete</button>
+ 
+        `;
+        list.appendChild(div);
+    });
+
 }
 
- // Cancel Booking
- function cancel (i) {
-    bookings.splice(i, 1);
-    localStorage.setItem("bookings", JSON.stringify(bookings));
-    displayBookings();
-    toast("Booking Cancelled");
 
- }
+// Delete Hostel
+function deleteHostel(index) {
+
+    if (confirm("Are you sure you want to delete this hostel?")) {
+
+        hostels.splice(index, 1);
+        localStorage.setItem("hostels", JSON.stringify(hostels));
+
+        toast("🗑 Hostel removed successfully");
+
+        displayHostels();
+        displayAdminHostels();
+        updateStats();
+
+    }
+}
+
+// preview function
+function showPreview(hostel) {
+    let preview = document.getElementById("preview");
+
+    if(!preview) return;
+
+    preview.innerHTML = `
+      <div class="card">
+      <h3>${hostel.name}</h3>
+      <p>${hostel.location}</p>
+      <p>${hostel.price}</p>
+      <p>${hostel.description}</p>
+      </div>
+    
+    `;
+}
+
+// Add Hostel Form Functionality 
+// Handles saving new hostel data
+document.addEventListener("DOMContentLoaded", function() {
+
+    let form = document.getElementById("hostelForm");
+
+    if (form) {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let newHostel = {
+                name: document.getElementById("name").value,
+                location: document.getElementById("location").value,
+                price: document.getElementById("price").value,
+                description: document.getElementById("description").value,
+                images: [
+                    { src: "images/default.jpg", label: "New Hostel"}
+                ]
+            };
+            
+            hostels.push(newHostel);
+            localStorage.setItem("hostels", JSON.stringify(hostels));
+
+            toast("Hostel added successfully")
+            document.getElementById("formMsg").innerText = "Hostel added successfully!"
+
+            showPreview(newHostel);
+
+            form.reset ();
+
+            displayHostels();
+            displayAdminHostels();
+            updateStats();
+
+            document.getElementById("adminHostelList").scrollIntoView({
+                behavior: "smooth"
+            });
+        });
+    }
+});
+
 
  // Contact from
  function sendMessage(){
@@ -504,38 +521,23 @@ function updateStats() {
     
  }
 
-//  Price Filter
-function filterPrice(max) {
-    document.getElementById("priceValue").innerText = max;
-    
-    let cards = document.getElementsByClassName("card");
+//  Update Stats
+function updateStats() {
+    let hostelCount = document.getElementById("totalHostels");
+    let bookingCount = document.getElementById("totalBookings");
 
-    hostels.forEach((h, i) => {
-        if (cards[i]) {
-            cards[i].style.display = (h.price <= max) ? "block" : "none";
-
-        }
-    });
-
+    if (hostelCount) hostelCount.innerText = hostels.length;
+    if (bookingCount) bookingCount.innerText = bookings.length;
 }
 
+// Cancel Booking
+ function cancel (i) {
+    bookings.splice(i, 1);
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+    displayBookings();
+    toast("Booking Cancelled");
 
-// Delete Hostel
-function deleteHostel(index) {
-
-    if (confirm("Are you sure you want to delete this hostel?")) {
-
-        hostels.splice(index, 1);
-        localStorage.setItem("hostels", JSON.stringify(hostels));
-
-        toast("🗑 Hostel removed successfully");
-
-        displayHostels();
-        displayAdminHostels();
-        updateStats();
-
-    }
-}
+ }
 
 // toast notification
 function toast(msg) {
