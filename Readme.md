@@ -62,7 +62,7 @@ cd student-hostel-booking-system
 3. Scenario 3: User submits incomplete form
 - Given: The user is on the booking page
 - When: The user submits without filling all fields
-Then: An error message is shown
+- Then: An error message is shown
 
 4. Scenario 4: Admin adds a new hostel
 - Given: Admin is on Add Hostel page
@@ -104,3 +104,9 @@ student-hostel-booking-system/
 - GitHub: https://github.com/modidi
 
 ## License
+Copyright (c) 2026 Maureen Mutua
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
