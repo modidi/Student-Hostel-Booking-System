@@ -302,6 +302,20 @@ input, textarea {
     margin-bottom: 10px;
 }
 
+nav button {
+    margin-left: 20px;
+    padding: 8px 15px;
+    color: white;
+    border: none;
+    background: #111827;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background: #1F2937;
+}
+
 .form-container {
     max-width: 500px;
     margin: 20px auto;

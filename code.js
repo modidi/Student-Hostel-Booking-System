@@ -396,6 +396,28 @@ function selectHostel(index) {
 
  }
 
+ //Admin Access Control
+ const isAdmin = localStorage.getItem("isAdmin");
+
+ if (document.getElementById("adminHostelList")){
+    if(isAdmin !== "true") {
+        let pass = prompt("Enter admin password:");
+
+        if (pass === "admin123") {
+            localStorage.setItem("isAdmin", "true");
+        } else {
+            alert("Access denied");
+            windows.location.href = "index.html";
+        }
+    }
+
+ }
+
+ function logout() {
+    localStorage.removeItem("isAdmin");
+    window.location.href = "index.html";
+ }
+ 
 //Admin: Display Hostels
 function displayAdminHostels() {
 
