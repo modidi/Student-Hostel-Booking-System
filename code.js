@@ -144,6 +144,9 @@ function prevImage() {
     showModalImage();
 }
 
+function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
 
 // Add Hostel Form Functionality 
 // Handles saving new hostel data
