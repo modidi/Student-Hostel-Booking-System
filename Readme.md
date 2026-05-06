@@ -36,13 +36,46 @@ cd student-hostel-booking-system
 ```
 
 - Running the Application
+1. Open index.html in your browser
+2. No server or installation required
 
+- Using the System
+1. Browse available hostels on the homepage.
+2. Use filters to refine results.
+3. Click Book to proceed to booking page
+4. Fill in booking form and submit
+5. View all bookings on the bookings page
+6. Admin can add hostels from add.html
 
 ## BDD (Behavior-Driven Development)
+### Feature: User Can book a hostel
+1. Scenario 1: User books a hostel successfully
+- Given: The user is on homepage
+- When: The user selects a hostel and clicks "Book"
+- Then: The user is redirected to the booking page
 
-### Feature
+2. Scenario 2: User submits booking form correctly
+- Given: The user is on the bookings page
+- When: The user fills all fields and submits
+- Then: The booking is saved and displayed
+
+3. Scenario 3: User submits incomplete form
+- Given: The user is on the booking page
+- When: The user submits without filling all fields
+Then: An error message is shown
+
+4. Scenario 4: Admin adds a new hostel
+- Given: Admin is on Add Hostel page
+- When: Admin fills and submits hostel form
+- Then: New hostel is added to listings
 
 ## Technologies Used
+- HTML - Page Structure and layout
+- CSS - Styling and responsive design
+- JavaScript - Application logic
+- localStorage - Data storage (hostels & bookings)
+- DOM Manipulation - Dynamic updates
+- Event Listeners - Form handling and interactions
 
 ## Project Structure
 ```
@@ -59,5 +92,6 @@ student-hostel-booking-system/
 └── README.md         # Project documentation
 ```
 ## Contact Information
+- GitHub: https://github.com/modidi
 
 ## License
