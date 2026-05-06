@@ -48,7 +48,7 @@ cd student-hostel-booking-system
 6. Admin can add hostels from add.html
 
 ## BDD (Behavior-Driven Development)
-### Feature: User Can book a hostel
+### Feature
 1. Scenario 1: User books a hostel successfully
 - Given: The user is on homepage
 - When: The user selects a hostel and clicks "Book"
