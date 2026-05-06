@@ -267,13 +267,15 @@ function displayHostels() {
         <p><strong>Price:</strong> Ksh ${h.price}</p>
         <p>${h.description}</p>
 
-        <button onClick="book(${i})">Book</button>
+        <button onclick="gotoBooking(${i})">Book</button>
 
         <p> Rating: ${h.rating || 0}/5</p>
         <button onclick="rateHostel(${i})"> Rate</button>
         `;
 
         list.appendChild(div);
+
+
 
         //Slideshow logic
         let currentIndex = 0;
@@ -305,6 +307,7 @@ function displayHostels() {
     });
 }
 
+
 //Admin: Display Hostels
 function displayAdminHostels() {
 
@@ -334,53 +337,40 @@ function displayAdminHostels() {
 
     //Book Hostel
  let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
- function book(i) {
+ 
+ document.addEventListener("DOMContentLoaded", function () {
+   let index = localStorage.getItem("selectedHostel");
+   let hostel = hostels[index];
 
-    let hostel = hostels[i];
-    if (!hostel) {
-        toast("Hostel not found");
+   if (hostel) {
+     toast(`Booking: ${hostel.name}`);
+   }
+ });
+
+ document.addEventListener("DOMContentLoaded", function (){
+
+ let bookingForm = document.getElementById("bookingForm");
+
+ if(bookingForm){
+    bookingForm.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let checkIn = document.getElementById("checkIn").value;
+    let checkOut = document.getElementById("checkOut").value;
+
+    if(!name || !email || !phone || !checkIn || ! checkOut) {
+        toast("Please fill all fields");
         return;
     }
 
-    let name = prompt("Enter your full name");
-    if (!name) {
-        toast("Booking cancelled: name required");
-        return;
-    }
     
-    let email = prompt("Enter your email");
-    if (!email) {
-        toast("Booking cancelled: email required");
-        return;
-    }
-
-    let phone = prompt("Enter phone number");
-    if (!phone) {
-        toast("Booking cancelled: phone required");
-        return;
-    }
-
-    let checkIn = prompt("Enter Check-in Date (YYYY-MM-DD)");
-    if(checkIn === null)return;
-
-    let checkOut = prompt("Enter Check-out Date (YYYY-MM-DD)");
-    if(checkOut === null)return;
-    
-    if (!checkIn || !checkOut) {
-        toast("Dates are required");
-        return;
-    }
-    
-
     let inDate = new Date(checkIn);
     let outDate = new Date(checkOut);
     let today = new Date();
     today.setHours(0,0,0,0);
-
-    if (isNaN(inDate.getTime()) || isNaN(outDate.getTime())) {
-        toast("Invalid date entered");
-        return;
-    }
 
     if (inDate < today) {
         toast("Check-in cannot be in the past");
@@ -393,23 +383,25 @@ function displayAdminHostels() {
     }
 
     bookings.push({
-        hostelName: hostel.name,
-        location: hostel.location,
-        price: hostel.price,
         userName: name,
-        email: email,
-        phone: phone,
+        email,
+        phone,
         checkIn,
         checkOut
+     });
+
+     localStorage.setItem("bookings", JSON.stringify(bookings));
+
+    toast(`Booked successfully!`);
+
+    // setTimeout(() => {
+    //     window.location.href = "bookings.html"
+    // }, 1000);
+
     });
+  }
 
-    localStorage.setItem("bookings", JSON.stringify(bookings));
-
-    toast(`Booked ${hostels[i].name} successfully!`);
-
-    updateStats();
-
-}
+ });
 
 // Rate 
 function rateHostel(i) {
@@ -443,18 +435,17 @@ function rateHostel(i) {
 
     list.innerHTML = "";
 
+    if (bookings.length === 0) {
+        list.innerHTML = "<p>No bookings yet.</p>"
+    }
+
     bookings.forEach((b, i) =>{
 
         let div = document.createElement("div");
         div.classList.add("card");
 
         div.innerHTML = `
-        <h3>${b.hostelName}</h3>
-
-        <p><strong>Location:</strong> ${b.location}</p>
-        <p><strong>Price:</strong> Ksh ${b.price}</p>
-
-        <hr>
+        <h3>Bookings ${i + 1}</h3>
 
         <p><strong>Name:</strong> ${b.userName}</p>
         <p><strong>Email:</strong> ${b.email}</p>
