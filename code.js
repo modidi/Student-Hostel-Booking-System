@@ -111,10 +111,10 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 }
 ];
 
+// image modal
 let currentImages = [];
 let currentIndex = 0;
 
-// Image Modal
 function openModal(src, label,hostelIndex) {
     currentImages = hostels[hostelIndex].images;
     currentIndex = currentImages.findIndex(img => img.src === src);
@@ -307,6 +307,10 @@ function displayHostels() {
     });
 }
 
+window.gotoBooking = function(index) {
+    localStorage.setItem("selectedHostel", index);
+    window.location.href = "bookings.html";
+};
 
 //Admin: Display Hostels
 function displayAdminHostels() {
@@ -338,15 +342,6 @@ function displayAdminHostels() {
     //Book Hostel
  let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
  
- document.addEventListener("DOMContentLoaded", function () {
-   let index = localStorage.getItem("selectedHostel");
-   let hostel = hostels[index];
-
-   if (hostel) {
-     toast(`Booking: ${hostel.name}`);
-   }
- });
-
  document.addEventListener("DOMContentLoaded", function (){
 
  let bookingForm = document.getElementById("bookingForm");
@@ -394,9 +389,6 @@ function displayAdminHostels() {
 
     toast(`Booked successfully!`);
 
-    // setTimeout(() => {
-    //     window.location.href = "bookings.html"
-    // }, 1000);
 
     });
   }
@@ -572,6 +564,7 @@ function toast(msg) {
     }, 2500);
          
 }
+
 
   displayHostels();
   displayBookings();
