@@ -335,29 +335,79 @@ function displayAdminHostels() {
     //Book Hostel
  let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
  function book(i) {
-    
-    let checkIn = prompt("Enter Check-in Date (YYYY-MM-DD)");
-    let checkOut = prompt("Enter Check-out Date (YYYY-MM-DD)");
 
-    if (!checkIn || !checkOut) {
-        toast("Booking Cancelled");
+    let hostel = hostels[i];
+    if (!hostel) {
+        toast("Hostel not found");
         return;
     }
 
-    if (new Date(checkIn) > new Date(checkOut)) {
+    let name = prompt("Enter your full name");
+    if (!name) {
+        toast("Booking cancelled: name required");
+        return;
+    }
+    
+    let email = prompt("Enter your email");
+    if (!email) {
+        toast("Booking cancelled: email required");
+        return;
+    }
+
+    let phone = prompt("Enter phone number");
+    if (!phone) {
+        toast("Booking cancelled: phone required");
+        return;
+    }
+
+    let checkIn = prompt("Enter Check-in Date (YYYY-MM-DD)");
+    if(checkIn === null)return;
+
+    let checkOut = prompt("Enter Check-out Date (YYYY-MM-DD)");
+    if(checkOut === null)return;
+    
+    if (!checkIn || !checkOut) {
+        toast("Dates are required");
+        return;
+    }
+    
+
+    let inDate = new Date(checkIn);
+    let outDate = new Date(checkOut);
+    let today = new Date();
+    today.setHours(0,0,0,0);
+
+    if (isNaN(inDate.getTime()) || isNaN(outDate.getTime())) {
+        toast("Invalid date entered");
+        return;
+    }
+
+    if (inDate < today) {
+        toast("Check-in cannot be in the past");
+        return;
+    }
+
+    if (inDate >= outDate) {
         toast("Check-out must be after check-in");
         return;
     }
 
     bookings.push({
-        ...hostels[i],
+        hostelName: hostel.name,
+        location: hostel.location,
+        price: hostel.price,
+        userName: name,
+        email: email,
+        phone: phone,
         checkIn,
         checkOut
-    })
+    });
 
     localStorage.setItem("bookings", JSON.stringify(bookings));
 
-    toast("Booking Confirmed!");
+    toast(`Booked ${hostels[i].name} successfully!`);
+
+    updateStats();
 
 }
 
@@ -394,15 +444,28 @@ function rateHostel(i) {
     list.innerHTML = "";
 
     bookings.forEach((b, i) =>{
+
         let div = document.createElement("div");
         div.classList.add("card");
 
         div.innerHTML = `
-        <h3>${b.name}</h3>
-        <p>Ksh ${b.price}</p>
+        <h3>${b.hostelName}</h3>
+
+        <p><strong>Location:</strong> ${b.location}</p>
+        <p><strong>Price:</strong> Ksh ${b.price}</p>
+
+        <hr>
+
+        <p><strong>Name:</strong> ${b.userName}</p>
+        <p><strong>Email:</strong> ${b.email}</p>
+        <p><strong>Phone:</strong> ${b.phone}</p>
+
+        <hr>
+
         <p><strong>Check-in:</strong> ${b.checkIn}</p>
         <p><strong>Check-out:</strong> ${b.checkOut}</p>
-        <button onClick="cancel(${i})">cancel</button>
+
+        <button onClick="cancel(${i})">cancel Booking</button>
 
         `;
 
