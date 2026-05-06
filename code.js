@@ -1,4 +1,4 @@
-//Data
+//Data,Array holds all the hostel listings
 let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 
 // Hostel 1
@@ -111,12 +111,18 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
 }
 ];
 
-// image modal
+// Image Modal
+//Handles image zooming 
 let currentImages = [];
 let currentIndex = 0;
 
+// Opens image modal when user clicks a hostel image
 function openModal(src, label,hostelIndex) {
+
+    // Get images for selected hostel
     currentImages = hostels[hostelIndex].images;
+
+    // Find clicked image index
     currentIndex = currentImages.findIndex(img => img.src === src);
     if (currentIndex === -1) currentIndex = 0;
 
@@ -161,6 +167,7 @@ function displayHostels() {
 
     hostels.forEach((h, i) => {
 
+        // Create hostel card container
         let div = document.createElement("div");
         div.classList.add("card");
 
@@ -209,7 +216,7 @@ function displayHostels() {
 
         }
         updateSlide();
-        setInterval(updateSlide, 5000);
+        setInterval(updateSlide, 5000); //Auto-change images every 5 seconds
         
     });
 }
@@ -304,14 +311,18 @@ function selectHostel(index) {
 
  if(bookingForm){
     bookingForm.addEventListener("submit", function(e){
+    
+    //Prevent page reload
     e.preventDefault();
 
-    let name = document.getElementById("name").value.trim();
+    // Get form values
+    let name = document.getElementById("userName").value.trim();
     let email = document.getElementById("email").value.trim();
     let phone = document.getElementById("phone").value.trim();
     let checkIn = document.getElementById("checkIn").value;
     let checkOut = document.getElementById("checkOut").value;
 
+    // Validate required fields
     if(!name || !email || !phone || !checkIn || ! checkOut) {
         toast("Please fill all fields");
         return;
@@ -397,6 +408,7 @@ function selectHostel(index) {
  }
 
  //Admin Access Control
+//  Restricts access to add.html page using simple password system
  const isAdmin = localStorage.getItem("isAdmin");
 
  if (document.getElementById("adminHostelList")){
@@ -407,7 +419,7 @@ function selectHostel(index) {
             localStorage.setItem("isAdmin", "true");
         } else {
             alert("Access denied");
-            windows.location.href = "index.html";
+            window.location.href = "index.html"; //Redirect if password is wrong
         }
     }
 
@@ -417,7 +429,7 @@ function selectHostel(index) {
     localStorage.removeItem("isAdmin");
     window.location.href = "index.html";
  }
- 
+
 //Admin: Display Hostels
 function displayAdminHostels() {
 
@@ -526,7 +538,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let name = document.getElementById("contactName").value.trim();
     let message = document.getElementById("message").value.trim();
     let error = document.getElementById("contactError");
-
+    
+    // Validate contact form fields
     if (! name || !message) {
         error.innerText = " Please fill all fields!";
         error.style.color = "red"
@@ -536,14 +549,15 @@ document.addEventListener("DOMContentLoaded", function() {
     error.innerText = "";
 
     toast("Message sent successfully !")
-
+    
+    // Clear form after successful submission
     document.getElementById("contactName").value = "";
     document.getElementById("message").value = "";
 
     
  }
 
-//  Update Stats
+//  Update total hostels and bookings count
 function updateStats() {
     let hostelCount = document.getElementById("totalHostels");
     let bookingCount = document.getElementById("totalBookings");
@@ -561,7 +575,8 @@ function updateStats() {
 
  }
 
-// toast notification
+// Toast notification
+// Displays temporary popup messages for user actions
 function toast(msg) {
     let t = document.createElement("div");
     t.innerText = msg;
@@ -595,7 +610,8 @@ function toast(msg) {
          
 }
 
-
+// Intial Function Calls
+// Runs all required functions when page loads
   displayHostels();
   displayBookings();
   displayAdminHostels()
