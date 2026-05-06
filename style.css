@@ -302,18 +302,22 @@ input, textarea {
     margin-bottom: 10px;
 }
 
-nav button {
-    margin-left: 20px;
+.logout-container {
+    right: 20px;
+    top: 15px;
+}
+
+.logout-container button {
     padding: 8px 15px;
     color: white;
     border: none;
-    background: #111827;
     border-radius: 6px;
     cursor: pointer;
+    background: #1F2937;
 }
 
-nav button:hover {
-    background: #1F2937;
+.logout-container button:hover {
+    background: #374151;
 }
 
 .form-container {
