@@ -91,6 +91,15 @@ student-hostel-booking-system/
 ├── images/           # Hostel images
 └── README.md         # Project documentation
 ```
+## Key Features
+- View hostel listings dynamically
+- Filter by price and search options
+- Image slideshow for each hostel
+- Booking system with validation
+- Data stored using localStorage
+- Admin hostel management (add/delete)
+- Responsive layout design
+
 ## Contact Information
 - GitHub: https://github.com/modidi
 
