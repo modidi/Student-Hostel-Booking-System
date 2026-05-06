@@ -37,19 +37,19 @@ Github: https://github.com/modidi/Student-Hostel-Booking-System
 ## Technologies Used
 
 ## Project Structure
+```
 student-hostel-booking-system/
-|
-├── index.html          #Homepage
-├── add.html            #Admin page
-├── bookings.html       #Booking form,booked hostels
-├── about.html          #About page
-├── contact.html        #Contact page
-├── style.css           #Styling file
-├── code.js             #Main Javascript logic
-├── images/             #Hostel images
-├── Readme.md           #Project documentation
-
-
+│
+├── index.html        # Homepage
+├── add.html          # Admin page
+├── bookings.html     # Booking form, booked hostels
+├── about.html        # About page
+├── contact.html      # Contact page
+├── style.css         # Styling file
+├── code.js           # Main JavaScript logic
+├── images/           # Hostel images
+└── README.md         # Project documentation
+```
 ## Contact Information
 
 ## License
