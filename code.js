@@ -90,8 +90,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
     name: "Make it Rain Hostel",
     location: "Karen",
     price: 9800,
-    description:
-      "Student Accommodation premium, private rooms and gym access.",
+    description: "Student Accommodation premium, private rooms and gym access.",
     rating: 0,
 
     images: [
@@ -375,7 +374,7 @@ function displayBookings() {
 }
 
 //Admin Access Control
-//  Restricts access to add.html page using simple password system
+// Restricts access to add.html page using simple password system
 const isAdmin = localStorage.getItem("isAdmin");
 
 if (document.getElementById("adminHostelList")) {

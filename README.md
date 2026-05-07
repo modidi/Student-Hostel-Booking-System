@@ -47,6 +47,9 @@ cd Student-Hostel-Booking-System
 5. View all bookings on the bookings page
 6. Admin can add hostels from add.html
 
+### Admin Access
+- Password: admin123
+
 ## BDD (Behavior-Driven Development)
 ### Feature
 1. Scenario 1: User books a hostel successfully
