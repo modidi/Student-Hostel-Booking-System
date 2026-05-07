@@ -5,7 +5,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
     name: "Blooming Hostel",
     location: "Nairobi CBD",
     price: 5000,
-    description: "Affordable hostel in city with good security.",
+    description: "Affordable hostel near the city with good security.",
     rating: 0,
 
     images: [
@@ -73,8 +73,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
     name: "The Fort Hostel",
     location: "Kamulu",
     price: 7800,
-    description:
-      "Hostel that is ideal for students who love a quiet environment",
+    description: "Ideal for students who love a quiet environment",
     rating: 0,
 
     images: [
@@ -92,7 +91,7 @@ let hostels = JSON.parse(localStorage.getItem("hostels")) || [
     location: "Karen",
     price: 9800,
     description:
-      "Student accommodation that is premium with private rooms and gym access.",
+      "Student Accommodation premium, private rooms and gym access.",
     rating: 0,
 
     images: [
