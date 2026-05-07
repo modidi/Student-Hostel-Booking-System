@@ -31,8 +31,8 @@ Github: https://github.com/modidi/Student-Hostel-Booking-System
 - Clone or download the project
 
 ```
-git clone https://github.com/modidi/student-hostel-booking-system.git
-cd student-hostel-booking-system
+git clone https://github.com/modidi/Student-Hostel-Booking-System.git
+cd Student-Hostel-Booking-System
 ```
 
 - Running the Application
